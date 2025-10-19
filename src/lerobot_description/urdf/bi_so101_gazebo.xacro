@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<!--
+  Gazebo-specific configuration for bimanual SO-101 robot
+
+  Additional Gazebo settings and plugins can be added here as needed.
+  The main ros2_control plugin is configured in bi_so101_ros2_control.xacro
+-->
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<!-- Additional Gazebo settings can be added here -->
+	<!-- For example: physics properties, sensors, etc. -->
+
+</robot>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Semantic Robot Description Format (SRDF) for bimanual SO-101 robot
+
+  This file defines planning groups, end effectors, and collision checking
+  configuration for the bimanual SO-101 robot.
+-->
+<robot name="bi_so101">
+
+    <!-- PLANNING GROUPS -->
+
+    <!-- Left arm group (5 arm joints) -->
+    <group name="left_arm">
+        <joint name="left_base_joint" />
+        <joint name="left_shoulder_pan" />
+        <joint name="left_shoulder_lift" />
+        <joint name="left_elbow_flex" />
+        <joint name="left_wrist_flex" />
+        <joint name="left_wrist_roll" />
+    </group>
+
+    <!-- Left gripper group -->
+    <group name="left_gripper">
+        <joint name="left_gripper" />
+    </group>
+
+    <!-- Right arm group (5 arm joints) -->
+    <group name="right_arm">
+        <joint name="right_base_joint" />
+        <joint name="right_shoulder_pan" />
+        <joint name="right_shoulder_lift" />
+        <joint name="right_elbow_flex" />
+        <joint name="right_wrist_flex" />
+        <joint name="right_wrist_roll" />
+    </group>
+
+    <!-- Right gripper group -->
+    <group name="right_gripper">
+        <joint name="right_gripper" />
+    </group>
+
+    <!-- Both arms group (for coordinated bimanual planning) -->
+    <group name="both_arms">
+        <group name="left_arm" />
+        <group name="right_arm" />
+    </group>
+
+    <!-- GROUP STATES (Named configurations) -->
+
+    <!-- Left arm home state -->
+    <group_state name="home" group="left_arm">
+        <joint name="left_shoulder_pan" value="0" />
+        <joint name="left_shoulder_lift" value="0" />
+        <joint name="left_elbow_flex" value="0" />
+        <joint name="left_wrist_flex" value="0" />
+        <joint name="left_wrist_roll" value="0" />
+    </group_state>
+
+    <!-- Left gripper home state -->
+    <group_state name="home" group="left_gripper">
+        <joint name="left_gripper" value="0" />
+    </group_state>
+
+    <!-- Right arm home state -->
+    <group_state name="home" group="right_arm">
+        <joint name="right_shoulder_pan" value="0" />
+        <joint name="right_shoulder_lift" value="0" />
+        <joint name="right_elbow_flex" value="0" />
+        <joint name="right_wrist_flex" value="0" />
+        <joint name="right_wrist_roll" value="0" />
+    </group_state>
+
+    <!-- Right gripper home state -->
+    <group_state name="home" group="right_gripper">
+        <joint name="right_gripper" value="0" />
+    </group_state>
+
+    <!-- END EFFECTORS -->
+
+    <end_effector name="left_eef" parent_link="left_gripper_link" group="left_gripper" />
+    <end_effector name="right_eef" parent_link="right_gripper_link" group="right_gripper" />
+
+    <!-- DISABLE COLLISIONS -->
+
+    <!-- Left arm self-collision disables -->
+    <disable_collisions link1="left_base" link2="left_shoulder" reason="Adjacent" />
+    <disable_collisions link1="left_base" link2="left_lower_arm" reason="Never" />
+    <disable_collisions link1="left_shoulder" link2="left_upper_arm" reason="Adjacent" />
+    <disable_collisions link1="left_shoulder" link2="left_lower_arm" reason="Never" />
+    <disable_collisions link1="left_lower_arm" link2="left_upper_arm" reason="Adjacent" />
+    <disable_collisions link1="left_lower_arm" link2="left_gripper_link" reason="Never" />
+    <disable_collisions link1="left_lower_arm" link2="left_wrist" reason="Adjacent" />
+    <disable_collisions link1="left_wrist" link2="left_gripper_link" reason="Adjacent" />
+    <disable_collisions link1="left_wrist" link2="left_jaw" reason="Never" />
+    <disable_collisions link1="left_gripper_link" link2="left_jaw" reason="Adjacent" />
+
+    <!-- Right arm self-collision disables -->
+    <disable_collisions link1="right_base" link2="right_shoulder" reason="Adjacent" />
+    <disable_collisions link1="right_base" link2="right_lower_arm" reason="Never" />
+    <disable_collisions link1="right_shoulder" link2="right_upper_arm" reason="Adjacent" />
+    <disable_collisions link1="right_shoulder" link2="right_lower_arm" reason="Never" />
+    <disable_collisions link1="right_lower_arm" link2="right_upper_arm" reason="Adjacent" />
+    <disable_collisions link1="right_lower_arm" link2="right_gripper_link" reason="Never" />
+    <disable_collisions link1="right_lower_arm" link2="right_wrist" reason="Adjacent" />
+    <disable_collisions link1="right_wrist" link2="right_gripper_link" reason="Adjacent" />
+    <disable_collisions link1="right_wrist" link2="right_jaw" reason="Never" />
+    <disable_collisions link1="right_gripper_link" link2="right_jaw" reason="Adjacent" />
+
+    <!-- Inter-arm collision disables (arms are far enough apart) -->
+    <disable_collisions link1="left_base" link2="right_base" reason="Never" />
+    <disable_collisions link1="left_shoulder" link2="right_shoulder" reason="Never" />
+    <disable_collisions link1="left_base" link2="table" reason="Adjacent" />
+    <disable_collisions link1="right_base" link2="table" reason="Adjacent" />
+
+    <!-- Additional inter-arm collision disables can be added based on workspace requirements -->
+
+</robot>

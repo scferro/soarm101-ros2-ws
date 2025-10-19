@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<!--
+  Bimanual SO-101 Robot
+
+  This file creates a bimanual SO-101 robot by instantiating two SO-101 arms
+  with "left_" and "right_" prefixes. The arms are mounted on a shared table/base
+  with symmetric positioning.
+-->
+
+<robot name="bi_so101" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<!-- Configurable Parameters -->
+	<!-- Distance of each arm from table center along X-axis (meters) -->
+	<xacro:property name="arm_spacing" value="0.3" />
+
+	<!-- Include SO-101 arm macro -->
+	<xacro:include filename="$(find lerobot_description)/urdf/so101_macro.xacro" />
+
+	<!-- Include Gazebo plugins -->
+	<xacro:include filename="$(find lerobot_description)/urdf/bi_so101_gazebo.xacro" />
+
+	<!-- Include ROS2 Control -->
+	<xacro:include filename="$(find lerobot_description)/urdf/bi_so101_ros2_control.xacro" />
+
+	<!-- World link (fixed reference frame) -->
+	<link name="world" />
+
+	<!-- Left arm - mounted along +X direction from world origin -->
+	<xacro:so101_arm prefix="left_" parent="world">
+		<origin xyz="${arm_spacing} 0 0" rpy="0 0 0" />
+	</xacro:so101_arm>
+
+	<!-- Right arm - mounted along -X direction from world origin -->
+	<xacro:so101_arm prefix="right_" parent="world">
+		<origin xyz="${-arm_spacing} 0 0" rpy="0 0 0" />
+	</xacro:so101_arm>
+
+</robot>
