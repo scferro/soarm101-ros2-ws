@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+
+<!--
+  ROS2 Control configuration for bimanual SO-101 robot with Isaac Sim
+
+  Uses topic_based_ros2_control to bridge between Isaac Sim joint state topics
+  and ros2_control framework. Isaac Sim publishes joint states to /isaac_joint_states
+  and subscribes to commands on /isaac_joint_commands.
+
+  This creates a single unified system for both arms.
+-->
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<ros2_control name="isaac_system" type="system">
+		<hardware>
+			<plugin>topic_based_ros2_control/TopicBasedSystem</plugin>
+			<param name="joint_commands_topic">/isaac_joint_commands</param>
+			<param name="joint_states_topic">/isaac_joint_states</param>
+			<param name="sum_wrapped_joint_states">false</param>
+		</hardware>
+
+		<!-- Left arm joints -->
+		<joint name="left_shoulder_pan">
+			<command_interface name="position">
+				<param name="min">-1.91986</param>
+				<param name="max">1.91986</param>
+			</command_interface>
+			<state_interface name="position" />
+		</joint>
+
+		<joint name="left_shoulder_lift">
+			<command_interface name="position">
+				<param name="min">-1.74533</param>
+				<param name="max">1.74533</param>
+			</command_interface>
+			<state_interface name="position" />
+		</joint>
+
+		<joint name="left_elbow_flex">
+			<command_interface name="position">
+				<param name="min">-1.74533</param>
+				<param name="max">1.5708</param>
+			</command_interface>
+			<state_interface name="position" />
+		</joint>
+
+		<joint name="left_wrist_flex">
+			<command_interface name="position">
+				<param name="min">-1.65806</param>
+				<param name="max">1.65806</param>
+			</command_interface>
+			<state_interface name="position" />
+		</joint>
+
+		<joint name="left_wrist_roll">
+			<command_interface name="position">
+				<param name="min">-2.79253</param>
+				<param name="max">2.79253</param>
+			</command_interface>
+			<state_interface name="position" />
+		</joint>
+
+		<joint name="left_gripper">
+			<command_interface name="position">
+				<param name="min">-0.174533</param>
+				<param name="max">1.74533</param>
+			</command_interface>
+			<state_interface name="position" />
+		</joint>
+
+		<!-- Right arm joints -->
+		<joint name="right_shoulder_pan">
+			<command_interface name="position">
+				<param name="min">-1.91986</param>
+				<param name="max">1.91986</param>
+			</command_interface>
+			<state_interface name="position" />
+		</joint>
+
+		<joint name="right_shoulder_lift">
+			<command_interface name="position">
+				<param name="min">-1.74533</param>
+				<param name="max">1.74533</param>
+			</command_interface>
+			<state_interface name="position" />
+		</joint>
+
+		<joint name="right_elbow_flex">
+			<command_interface name="position">
+				<param name="min">-1.74533</param>
+				<param name="max">1.5708</param>
+			</command_interface>
+			<state_interface name="position" />
+		</joint>
+
+		<joint name="right_wrist_flex">
+			<command_interface name="position">
+				<param name="min">-1.65806</param>
+				<param name="max">1.65806</param>
+			</command_interface>
+			<state_interface name="position" />
+		</joint>
+
+		<joint name="right_wrist_roll">
+			<command_interface name="position">
+				<param name="min">-2.79253</param>
+				<param name="max">2.79253</param>
+			</command_interface>
+			<state_interface name="position" />
+		</joint>
+
+		<joint name="right_gripper">
+			<command_interface name="position">
+				<param name="min">-0.174533</param>
+				<param name="max">1.74533</param>
+			</command_interface>
+			<state_interface name="position" />
+		</joint>
+	</ros2_control>
+
+</robot>

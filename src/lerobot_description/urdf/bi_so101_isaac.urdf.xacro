@@ -1,14 +1,16 @@
 <?xml version="1.0"?>
 
 <!--
-  Bimanual SO-101 Robot
+  Bimanual SO-101 Robot with Isaac Sim Integration
 
-  This file creates a bimanual SO-101 robot by instantiating two SO-101 arms
-  with "left_" and "right_" prefixes. The arms are mounted on a shared table/base
-  with symmetric positioning.
+  This file creates a bimanual SO-101 robot configured for Isaac Sim.
+  It uses topic_based_ros2_control to bridge between Isaac Sim and ROS2.
+
+  Isaac Sim handles the actual physics simulation and publishes joint states.
+  This URDF is used by robot_state_publisher and ros2_control on the ROS2 side.
 -->
 
-<robot name="bi_so101" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="bi_so101_isaac" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 	<!-- Configurable Parameters -->
 	<!-- Distance of each arm from table center along X-axis (meters) -->
@@ -17,8 +19,8 @@
 	<!-- Include SO-101 arm macro -->
 	<xacro:include filename="$(find lerobot_description)/urdf/so101_macro.xacro" />
 
-	<!-- Include ROS2 Control (includes Gazebo plugins) -->
-	<xacro:include filename="$(find lerobot_description)/urdf/bi_so101_ros2_control.xacro" />
+	<!-- Include Isaac Sim ROS2 Control -->
+	<xacro:include filename="$(find lerobot_description)/urdf/bi_so101_isaac_ros2_control.xacro" />
 
 	<!-- World link (fixed reference frame) -->
 	<link name="world" />

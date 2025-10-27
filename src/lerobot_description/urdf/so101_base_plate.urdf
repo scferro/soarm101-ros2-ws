@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+  SO-101 Base URDF
+
+  Standalone URDF for the SO-101 arm base using the unified base mesh.
+-->
+<robot name="so101_base">
+
+	<!-- Material definition -->
+	<material name="3d_printed">
+		<color rgba="0.12 0.12 0.12 1.0" />
+	</material>
+
+	<!-- Base link -->
+	<link name="base_link">
+		<inertial>
+			<origin xyz="0.020739 0.00204287 0.065966" rpy="0 0 0" />
+			<mass value="0.147" />
+			<inertia ixx="0.000136117" ixy="4.59787e-07" ixz="9.75275e-08"
+			         iyy="0.000114686" iyz="-4.97151e-06" izz="0.000130364" />
+		</inertial>
+
+		<!-- Visual representation -->
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://lerobot_description/meshes/so101/so101_arm_base.stl"
+				      scale="0.001 0.001 0.001" />
+			</geometry>
+			<material name="3d_printed" />
+		</visual>
+
+		<!-- Collision geometry -->
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://lerobot_description/meshes/so101/so101_arm_base.stl"
+				      scale="0.001 0.001 0.001" />
+			</geometry>
+		</collision>
+	</link>
+
+</robot>

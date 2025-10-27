@@ -55,4 +55,11 @@
         </joint>
     </ros2_control>
 
+    <!-- Gazebo ROS2 Control plugin -->
+    <gazebo>
+        <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+            <parameters>$(find lerobot_controller)/config/so101_controllers.yaml</parameters>
+        </plugin>
+    </gazebo>
+
 </robot>
